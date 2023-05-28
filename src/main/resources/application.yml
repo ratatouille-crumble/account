@@ -1,0 +1,15 @@
+spring:
+  config:
+    name: test
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:mysql://localhost:3306/toystory
+    username: toystory
+    password: toystory
+  flyway:
+    enabled: true
+    url: jdbc:mysql://localhost:3306/toystory
+    locations: classpath:/db/migration
+    user: 'toystory'
+    password: 'toystory'
