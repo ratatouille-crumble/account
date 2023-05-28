@@ -39,6 +39,7 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("io.kotest:kotest-runner-junit5:5.5.5")
 	testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
+	testImplementation("org.flywaydb:flyway-core")
 }
 
 dependencyManagement {
