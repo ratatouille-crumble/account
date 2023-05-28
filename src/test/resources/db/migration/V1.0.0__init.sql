@@ -1,4 +1,8 @@
-create table if not exists users3
+SET MODE MYSQL; /* another h2 way to set mode */
+
+CREATE SCHEMA IF NOT EXISTS "public"; /* required due to issue with flyway --> https://stackoverflow.com/a/19115417/1224584*/
+
+create table if not exists users
 (
     id             bigint auto_increment
         primary key,
