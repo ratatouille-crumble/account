@@ -6,16 +6,15 @@ services:
     image: mysql:8
     container_name: account-db
     environment:
-      - "MYSQL_RANDOM_ROOT_PASSWORD=toystory"
-      - "MYSQL_DATABASE=toystory"
-      - "MYSQL_USER=toystory"
-      - "MYSQL_PASSWORD=toystory"
+      - MYSQL_ROOT_PASSWORD=toystory
+      - MYSQL_DATABASE=toystory
+      - MYSQL_USER=toystory
+      - MYSQL_PASSWORD=toystory
     ports:
       - "3306:3306"
 
   redis:
-    platform: linux/x86_64
-    image: redis:alpine
+    image: redis
     container_name: account-redis
     ports:
       - "6379:6379"

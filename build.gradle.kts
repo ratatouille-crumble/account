@@ -15,7 +15,7 @@ repositories {
 	mavenCentral()
 }
 
-extra["springCloudVersion"] = "2022.0.2"
+//extra["springCloudVersion"] = "2022.0.2"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
@@ -26,9 +26,11 @@ dependencies {
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+//	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 	implementation("io.asyncer:r2dbc-mysql:1.0.1")
-	runtimeOnly("com.mysql:mysql-connector-j")
+	implementation("org.springframework.boot:spring-boot-docker-compose")
+	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+	implementation("com.mysql:mysql-connector-j:8.0.32")
 	runtimeOnly("io.r2dbc:r2dbc-h2")
 	runtimeOnly("com.h2database:h2")
 
@@ -40,11 +42,11 @@ dependencies {
 	testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")
 }
 
-dependencyManagement {
-	imports {
-		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
-	}
-}
+//dependencyManagement {
+//	imports {
+//		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+//	}
+//}
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
