@@ -1,61 +1,39 @@
 package com.karrot42.account.repository
 
+import com.karrot42.account.config.SchemaInitConfig
+import com.karrot42.account.domain.Account
 import io.kotest.core.spec.style.FreeSpec
-import io.kotest.matchers.shouldBe
-import io.r2dbc.spi.ConnectionFactory
+import io.kotest.matchers.longs.shouldBeGreaterThan
+import io.kotest.matchers.nulls.shouldNotBeNull
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest
-import org.springframework.r2dbc.core.DatabaseClient
+import org.springframework.context.annotation.Import
 
 @DataR2dbcTest
+@Import(SchemaInitConfig::class)
 internal class AccountRepositoryTest @Autowired constructor(
-    val connectionFactory: ConnectionFactory,
-    val databaseClient: DatabaseClient,
-    val accountRepository: AccountRepository
+    private val accountRepository: AccountRepository
 ) : FreeSpec({
-    "String.length" - {
-        "should return the length of the string" {
-            "sammy".length shouldBe 5
-            "".length shouldBe 0
-        }
+
+    beforeEach {
+        accountRepository.deleteAll()
     }
 
-    "containers can be nested as deep as you want" - {
-        "and so we nest another container" - {
-            "yet another container" - {
-                "finally a real test" {
-                    1 + 1 shouldBe 2
-                }
-            }
-        }
+    "should create account" {
+        val account = Account.of(
+            name = "name",
+            nickname = "nickname",
+            email = "email",
+            profileUri = "profileUri",
+            ageAgreement = true,
+            termAgreement = true,
+        )
+        val created = accountRepository.save(account)
+
+        val result = accountRepository.findById(created.id)
+
+        result.shouldNotBeNull()
+        result.id shouldBeGreaterThan 0
     }
 })
 
-//@DataR2dbcTest
-//@Disabled
-//class PostRepositoryTest {
-//
-//    @Autowired
-//    private lateinit var posts: PostRepository
-//
-//    @Autowired
-//    private lateinit var client: DatabaseClient
-//
-//    @Test
-//    fun `get all posts`() {
-//        val inserted = client.insert().into<Post>().table("posts")
-//            .using(Post(title = "mytitle", content = "mycontent"))
-//            .map { row, rowMetadata -> row.get(0) }
-//            .one() as Long
-//
-//        println("inserted id:$inserted")
-//
-//        runBlocking {
-//            val post = posts.findOne(inserted)
-//            assertEquals("mytitle", post?.title)
-//            assertEquals("mycontent", post?.content)
-//        }
-//
-//    }
-//
-//}
