@@ -3,6 +3,7 @@ package com.karrot42.account.domain
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
+import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 
@@ -14,9 +15,9 @@ data class Account(
     val nickname: String,
     val email: String,
     val profileUri: String,
-    private val activated: Byte? = 0,
-    private val ageAgreement: Long,
-    private val termAgreement: Long,
+    private val activated: Byte = 0,
+    private val ageAgreement: Byte = 0,
+    private val termAgreement: Byte = 0,
     val deletedAt: LocalDateTime? = null,
     @CreatedDate
     val createdAt: LocalDateTime = LocalDateTime.now(),
@@ -27,10 +28,10 @@ data class Account(
         get() = activated == 1.toByte()
 
     val isAgeAgreement: Boolean
-        get() = ageAgreement == 1L
+        get() = ageAgreement == 1.toByte()
 
     val isTermAgreement: Boolean
-        get() = termAgreement == 1L
+        get() = termAgreement == 1.toByte()
 
     companion object {
         fun of(
