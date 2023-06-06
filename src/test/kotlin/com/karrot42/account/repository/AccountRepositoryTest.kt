@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import
 @DataR2dbcTest
 @Import(SchemaInitConfig::class)
 internal class AccountRepositoryTest @Autowired constructor(
-    private val accountRepository: AccountRepository
+    private val accountRepository: AccountRepository,
 ) : FreeSpec({
 
     beforeEach {
@@ -36,4 +36,3 @@ internal class AccountRepositoryTest @Autowired constructor(
         result.id shouldBeGreaterThan 0
     }
 })
-

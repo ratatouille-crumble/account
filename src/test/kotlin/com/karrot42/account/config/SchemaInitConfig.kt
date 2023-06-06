@@ -22,9 +22,9 @@ class SchemaInitConfig {
                     addPopulators(
                         ResourceDatabasePopulator(
                             ClassPathResource("sql/schema.sql"),
-                        )
+                        ),
                     )
-                }
+                },
             )
         }
 }
