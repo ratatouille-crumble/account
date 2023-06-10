@@ -16,9 +16,10 @@ class SecurityConfig {
     fun springSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         return http {
             authorizeExchange {
-                authorize(pathMatchers("/sign-in"), permitAll)
+                authorize(pathMatchers("/api/v1/sign-in", "/api/v1/sign-out"), permitAll)
                 authorize(anyExchange, denyAll)
             }
+            csrf { disable() }
             formLogin { disable() }
             httpBasic { disable() }
         }
