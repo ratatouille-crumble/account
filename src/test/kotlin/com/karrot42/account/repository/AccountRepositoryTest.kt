@@ -13,26 +13,28 @@ import org.springframework.context.annotation.Import
 @Import(SchemaInitConfig::class)
 internal class AccountRepositoryTest @Autowired constructor(
     private val accountRepository: AccountRepository,
-) : FreeSpec({
+) : FreeSpec(
+    {
 
-    beforeEach {
-        accountRepository.deleteAll()
-    }
+        beforeEach {
+            accountRepository.deleteAll()
+        }
 
-    "should create account" {
-        val account = Account.of(
-            name = "name",
-            nickname = "nickname",
-            email = "email",
-            profileUri = "profileUri",
-            ageAgreement = true,
-            termAgreement = true,
-        )
-        val created = accountRepository.save(account)
+        "should create account" {
+            val account = Account.of(
+                name = "name",
+                nickname = "nickname",
+                email = "email",
+                profileUri = "profileUri",
+                ageAgreement = true,
+                termAgreement = true,
+            )
+            val created = accountRepository.save(account)
 
-        val result = accountRepository.findById(created.id)
+            val result = accountRepository.findById(created.id)
 
-        result.shouldNotBeNull()
-        result.id shouldBeGreaterThan 0
-    }
-})
+            result.shouldNotBeNull()
+            result.id shouldBeGreaterThan 0
+        }
+    },
+)
