@@ -1,0 +1,21 @@
+spring:
+  data:
+    redis:
+      host: containers-us-west-112.railway.app
+      port: 5915
+      username: default
+      password: VvXQ5xShKFSijZMSfb7i
+
+  datasource:
+    driver-class-name: 'com.mysql.cj.jdbc.Driver'
+    url: jdbc:mysql://containers-us-west-22.railway.app:6609/railway
+    username: root
+    password: Qft7vp1lHHCFZamGWp7b
+    hikari:
+      maximum-pool-size: 5
+      max-lifetime: 1800000
+      minimum-idle: 2
+      idle-timeout: 30000
+      connection-timeout: 15000
+      leak-detection-threshold: 60000
+      pool-name: account-db-pool
