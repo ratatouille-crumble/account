@@ -5,6 +5,7 @@ spring:
       port: 5915
       username: default
       password: VvXQ5xShKFSijZMSfb7i
+      database: 1
 
   datasource:
     driver-class-name: 'com.mysql.cj.jdbc.Driver'

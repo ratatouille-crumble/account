@@ -15,10 +15,12 @@ class SecurityConfig {
     fun springSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain {
         return http {
             authorizeExchange {
+                authorize("/auth/signin", permitAll)
                 authorize(anyExchange, authenticated)
             }
-            formLogin {  }
-            httpBasic {  }
+            csrf { disable() }
+            formLogin { disable() }
+            httpBasic { disable() }
         }
     }
 }
