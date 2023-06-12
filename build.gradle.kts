@@ -29,9 +29,11 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
 	implementation("io.asyncer:r2dbc-mysql:1.0.1")
+	implementation("org.springframework.session:spring-session-data-redis:3.1.0")
 	runtimeOnly("com.mysql:mysql-connector-j")
 	runtimeOnly("io.r2dbc:r2dbc-h2")
 	runtimeOnly("com.h2database:h2")
+	compileOnly("jakarta.servlet:jakarta.servlet-api:6.0.0")
 
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
