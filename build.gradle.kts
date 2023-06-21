@@ -31,9 +31,6 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
-	implementation("io.asyncer:r2dbc-mysql:1.0.1")
-    implementation("com.google.auth:google-auth-library-oauth2-http:1.17.0")
-    runtimeOnly("com.mysql:mysql-connector-j")
 	runtimeOnly("io.r2dbc:r2dbc-h2")
 	runtimeOnly("com.h2database:h2")
 
