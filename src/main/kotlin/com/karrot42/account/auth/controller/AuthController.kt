@@ -1,10 +1,9 @@
 package com.karrot42.account.auth.controller
 
-import com.karrot42.account.auth.controller.dto.SignInRequest
+import com.karrot42.account.auth.controller.dto.SignupRequest
 import com.karrot42.account.auth.service.AuthService
 import jakarta.validation.Valid
 import kotlinx.coroutines.reactor.awaitSingleOrNull
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -16,11 +15,11 @@ class AuthController(
    private val authService: AuthService
 ) {
 
-    @PostMapping("/api/v1/sign-in")
-    suspend fun signIn(session: WebSession, @Valid @RequestBody signInRequest: SignInRequest): String {
-//        authService.signIn(signInRequest)
+    @PostMapping("/api/v1/sign-up")
+    suspend fun signUp(session: WebSession, @Valid @RequestBody signRequest: SignupRequest): String {
+        val accountId = authService.sign(signRequest.toCommand())
 
-        session.attributes["user"] = 123L
+        session.attributes["user"] = accountId
 
         return session.id
     }

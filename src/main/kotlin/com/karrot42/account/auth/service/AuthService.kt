@@ -1,22 +1,28 @@
 package com.karrot42.account.auth.service
 
-import com.google.api.client.json.webtoken.JsonWebSignature
-import com.google.auth.oauth2.TokenVerifier
+
+import com.karrot42.account.auth.service.dto.SignUpCommand
+import com.karrot42.account.domain.Account
+import com.karrot42.account.domain.vo.Email
+import com.karrot42.account.domain.vo.Password
 import com.karrot42.account.repository.AccountRepository
-import com.karrot42.account.repository.findActiveAccount
-import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AuthService(
     private val accountRepository: AccountRepository,
 ) {
 
-    suspend fun signIn(idToken: String){
-        // google
-        val result: JsonWebSignature = TokenVerifier.newBuilder().build().verify(idToken)
-        val user = accountRepository.findActiveAccount(result.payload["email"] as String).awaitSingle()
+    @Transactional
+    suspend fun sign(command:SignUpCommand): Long {
+        val isUserExist = accountRepository.existsAccountByEmail(command.email.value)
 
-        println(user)
+        check(!isUserExist) { "duplicated email" }
+
+        val account = Account.signUp(command.email, command.password)
+        accountRepository.save(account)
+
+        return account.id
     }
 }
