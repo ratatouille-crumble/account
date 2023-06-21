@@ -5,8 +5,8 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.0"
 	id("org.jmailen.kotlinter") version "3.15.0"
 
-	kotlin("jvm") version "1.7.22"
-	kotlin("plugin.spring") version "1.7.22"
+	kotlin("jvm") version "1.8.22"
+	kotlin("plugin.spring") version "1.8.22"
 }
 
 group = "com.karrot42"
@@ -22,6 +22,7 @@ extra["springCloudVersion"] = "2022.0.2"
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis-reactive")
+    implementation("org.springframework.session:spring-session-data-redis")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -30,8 +31,6 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.springframework.cloud:spring-cloud-starter-gateway")
-	implementation("io.asyncer:r2dbc-mysql:1.0.1")
-	runtimeOnly("com.mysql:mysql-connector-j")
 	runtimeOnly("io.r2dbc:r2dbc-h2")
 	runtimeOnly("com.h2database:h2")
 

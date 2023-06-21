@@ -20,13 +20,9 @@ internal class AccountRepositoryTest @Autowired constructor(
     }
 
     "should create account" {
-        val account = Account.of(
-            name = "name",
-            nickname = "nickname",
+        val account = Account(
             email = "email",
-            profileUri = "profileUri",
-            ageAgreement = true,
-            termAgreement = true,
+            password = "profileUri",
         )
         val created = accountRepository.save(account)
 

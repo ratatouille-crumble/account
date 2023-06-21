@@ -1,0 +1,12 @@
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  session:
+    store-type: redis
+    redis:
+      flush-mode: immediate
+  r2dbc:
+    url: r2dbc:mysql://root:Qft7vp1lHHCFZamGWp7b@containers-us-west-22.railway.app:6609/railway
