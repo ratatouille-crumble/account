@@ -2,6 +2,7 @@ package com.karrot42.account.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpStatus
 import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity
@@ -11,6 +12,7 @@ import org.springframework.security.config.web.server.invoke
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.web.server.SecurityWebFilterChain
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter
+import org.springframework.security.web.server.authentication.HttpStatusServerEntryPoint
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers.pathMatchers
 import reactor.core.publisher.Mono
 
@@ -33,14 +35,19 @@ class SecurityConfig {
                 authorize(pathMatchers("/api/v1/**"), authenticated)
                 authorize(anyExchange, denyAll)
             }
-            addFilterAt(jwtAuthenticationFilter(manager), SecurityWebFiltersOrder.AUTHENTICATION)
+            addFilterAt(authenticationFilter(manager), SecurityWebFiltersOrder.AUTHENTICATION)
             csrf { disable() }
             formLogin { disable() }
             httpBasic { disable() }
+            logout { disable() }
+
+            exceptionHandling {
+                authenticationEntryPoint = HttpStatusServerEntryPoint(HttpStatus.NOT_FOUND)
+            }
         }
     }
 
-    private fun jwtAuthenticationFilter(manager: ReactiveAuthenticationManager): AuthenticationWebFilter {
+    private fun authenticationFilter(manager: ReactiveAuthenticationManager): AuthenticationWebFilter {
         val bearerAuthenticationFilter = AuthenticationWebFilter(manager)
 
         bearerAuthenticationFilter.setServerAuthenticationConverter { exchange ->
